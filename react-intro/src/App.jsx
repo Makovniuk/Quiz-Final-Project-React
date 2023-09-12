@@ -1,7 +1,14 @@
 import * as React from 'react';
 import QuizMain from './pages/QuizMain/QuizMain';
-// import './styled.js';
-import { MainWrapper, TextLogo, HeaderGrid, Item, MainGrid, SideBarGrid, FooterGrid,  } from './styled.js';
+import { 
+MainWrapper, 
+TextLogo, 
+HeaderGrid, 
+Item, 
+MainGrid, 
+SideBarGrid, 
+FooterGrid,  
+} from './styled.js';
 
 export default function App() {
   
