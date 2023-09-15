@@ -1,9 +1,10 @@
 import { CardMedia, Paper } from "@mui/material";
 import { ModalWrapper } from "./styled";
 
-export default function ModalWindow({ active, setActive, content }) {
+export default function ModalWindow({  setActive, content }) {
  const closeModal = () => {
-    setActive(!active);
+    setActive();
+    
   };
 
   return (

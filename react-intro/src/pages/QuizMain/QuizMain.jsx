@@ -1,7 +1,8 @@
 import { Grid } from "@mui/material";
 import React, { useCallback, useEffect, useState } from "react";
 import { quizs } from "../../api/quizs/quizs";
-import CardItem from "../../components/Cards/CardItem";
+// import CardItem from "../../components/Cards/CardItem";
+import CardItemClassComponent from "../../components/ClassComponents/CardItemClassComponent";
 import Progress from "../../components/Progress";
 
 export default function QuizMain() {
@@ -32,7 +33,7 @@ export default function QuizMain() {
     <>
       <Grid container spacing={6}>
         {quizList.map((quizCardItem) => (
-          <CardItem  key={quizCardItem.id} quizCard = {quizCardItem} />
+          <CardItemClassComponent  key={quizCardItem.id} quizCard = {quizCardItem} />
         ))}
       </Grid>
     </>

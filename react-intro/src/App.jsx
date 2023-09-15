@@ -1,5 +1,6 @@
 import * as React from 'react';
-import QuizMain from './pages/QuizMain/QuizMain';
+import QuizMainClassComponent from './components/ClassComponents/QuizMainClassComponent';
+// import QuizMain from './pages/QuizMain/QuizMain';
 import { 
 MainWrapper, 
 TextLogo, 
@@ -25,7 +26,7 @@ export default function App() {
         </SideBarGrid>
         <MainGrid item lg={10}>
           <Item>
-          <QuizMain />
+          <QuizMainClassComponent />
           </Item>
         </MainGrid>
         <FooterGrid item lg={12}>

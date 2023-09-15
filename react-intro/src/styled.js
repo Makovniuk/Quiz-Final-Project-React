@@ -32,6 +32,7 @@ export const SideBarGrid = styled(Grid)(() => ({
     height: 'auto'
 }));
 
+
 export const MainGrid = styled(Grid)(() => ({
     padding: '20px',
     display: 'flex',
