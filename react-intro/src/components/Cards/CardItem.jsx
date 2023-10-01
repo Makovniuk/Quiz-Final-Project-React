@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -6,39 +6,57 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
-import ModalWindow from "../modal/ModalWindow";
+import IconButton from '@mui/material/IconButton';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import ModalWindow from '../modal/ModalWindow';
 
-export default function CardItem({ quizCard }) {
+export default function CardItem({ quizCard, handleNavigate }) {
   const [isShowModal, setShowModal] = useState(false);
- 
+
   const handleShowModak = () => {
     setShowModal(!isShowModal);
   };
 
   return (
     <>
-      <Grid item xs={12} md={5} spacing={4} >
-        <Card sx={{ maxWidth: 400 }}>
+      <Grid item xs={12} md={4} spacing={4} >
+        <Card sx={{ maxWidth: 300 }}>
           <CardMedia
-            sx={{ height: 300 }}
+            sx={{ minHeight: 180 }}
             image={quizCard.img}
             title={quizCard.nameQuiz}
           />
           <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
+            <Typography gutterBottom variant="h6" component="div">
               {quizCard.nameQuiz}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              {quizCard.description}...
+              {quizCard.description.substr(0, 50)}...
             </Typography>
           </CardContent>
           <CardActions>
-            <Button size="small">Играть</Button>
-            <Button size="small" onClick={handleShowModak}>Показать детали</Button>
+            <IconButton size="small" aria-label="add to favorites">
+              <FavoriteIcon color='red' />
+            </IconButton>
+            <Button
+              component="label"
+              size="small"
+              onClick={() => handleNavigate(quizCard.topicQuiz)}>Играть
+            </Button>
+            <Button
+              component="label"
+              size="small"
+              onClick={handleShowModak}>Подробнее
+            </Button>
           </CardActions>
         </Card>
       </Grid>
-      {isShowModal && <ModalWindow active={isShowModal} setActive={handleShowModak} content={quizCard} />}
+      {isShowModal && <ModalWindow
+        active={isShowModal}
+        setActive={handleShowModak}
+        content={quizCard}
+        handleNavigate={handleNavigate}
+      />}
     </>
- );
+  );
 }

@@ -1,6 +1,6 @@
 import { styled } from '@mui/material';
 
-export const ModalWrapper= styled('div')(() => ({
+export const ModalWrapper = styled('div')(() => ({
   position: 'fixed',
   top: 0,
   left: 0,
