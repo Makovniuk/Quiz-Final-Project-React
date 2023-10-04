@@ -1,4 +1,3 @@
-
 .app {
   background-color: #A79C93;
   width: 800px;
@@ -112,4 +111,11 @@ button:focus {
 
 button svg {
   margin-right: 5px;
+}
+
+::placeholder { 
+  color: black;
+  font-size: 15px;
+  font-weight: bold;
+  opacity: 0.7;
 }

@@ -1,29 +1,37 @@
-import { Grid } from '@mui/material';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useState,
+  useMemo,
+} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { quizs } from '../../api/quizs/quizs';
 import CardItem from '../../components/Cards/CardItem';
 import Progress from '../../components/Progress/Progress';
+import thunks from '../../store/services/quizs/thunks';
+import { CardWrapp } from './styled';
 
 export default function QuizMain() {
+  const { quizs, filter, filtredQuizes } = useSelector((state) => state.quizsReducer);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [quizList, setQuizList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+
+  const quizList = useMemo(() => (filter ? filtredQuizes : quizs), [filter, filtredQuizes, quizs]);
 
   const fetchQuizList = useCallback(async () => {
     setLoading(true);
 
     try {
-      const response = await quizs.get();
-      setQuizList(response);
+      await dispatch(thunks.fetchQuizs());
     } catch (err) {
       console.log(err);
       setError(err);
     } finally {
       setLoading(false);
     }
-  }, [setQuizList, setError, setLoading]);
+  }, [dispatch]);
 
   useEffect(() => { fetchQuizList(); }, [fetchQuizList]);
 
@@ -35,8 +43,7 @@ export default function QuizMain() {
   if (error) return <p>{error}</p>;
 
   return (
-    <>
-      <Grid container spacing={2}>
+    <CardWrapp>
         {quizList.map((quizCardItem) => (
           <CardItem
             key={quizCardItem.id}
@@ -44,7 +51,6 @@ export default function QuizMain() {
             handleNavigate={handleNavigate}
           />
         ))}
-      </Grid>
-    </>
+    </CardWrapp>
   );
 }
