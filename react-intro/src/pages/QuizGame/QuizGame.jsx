@@ -1,14 +1,16 @@
 /* eslint-disable no-tabs */
 import { Box, Button } from '@mui/material';
 import React, { useCallback, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { topicQuiz } from '../../api/topicQuiz/topicQuiz';
 import Progress from '../../components/Progress/Progress';
+import thunks from '../../store/services/quizGame/thunks';
 
 export default function QuizGame() {
   const navigate = useNavigate();
   const { topic } = useParams();
-  const [questionList, setQuestionList] = useState([]);
+  const { quizGame } = useSelector((state) => state.quizGameReducer);
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -38,7 +40,7 @@ export default function QuizGame() {
     }
 
     const nextQuestion = currentQuestion + 1;
-    if (nextQuestion < questionList.length) {
+    if (nextQuestion < quizGame.length) {
       setCurrentQuestion(nextQuestion);
     } else {
       setShowScore(true);
@@ -49,15 +51,14 @@ export default function QuizGame() {
     setLoading(true);
 
     try {
-      const response = await topicQuiz.get(topic);
-      setQuestionList(response);
+      await dispatch(thunks.fetchQuizGame(topic));
     } catch (err) {
       console.log(err);
       setError(err);
     } finally {
       setLoading(false);
     }
-  }, [topic]);
+  }, [dispatch, topic]);
 
   const handleNavigate = (path) => {
     // eslint-disable-next-line no-unused-expressions
@@ -76,7 +77,7 @@ export default function QuizGame() {
         <div>
           <h2>Your scored <span
           style={{ color: 'green' }}>{score}</span> out of <span
-          style={{ color: 'red' }}>{questionList.length}</span></h2>
+          style={{ color: 'red' }}>{quizGame.length}</span></h2>
           <h2>Your time {timerMinute} m : {timerSecond} s</h2>
           <div className='score-section'>
             <Button
@@ -100,12 +101,12 @@ export default function QuizGame() {
             </div>
             <div className='question-section'>
               <div className='question-count'>
-                <span>Question {currentQuestion + 1}</span>/{questionList.length}
+                <span>Question {currentQuestion + 1}</span>/{quizGame.length}
               </div>
-              <div className='question-text'><h3>{questionList[currentQuestion].questoinText}</h3></div>
+              <div className='question-text'><h3>{quizGame[currentQuestion].questoinText}</h3></div>
              </div>
              <div className='answer-section'>
-                {questionList[currentQuestion].answerOptions.map((answerOption) => (
+                {quizGame[currentQuestion].answerOptions.map((answerOption) => (
                   <button key={answerOption.id} onClick={() => handleAnswerOptionClick(answerOption.isCorrect)}>
                   {answerOption.answerText}
                   </button>

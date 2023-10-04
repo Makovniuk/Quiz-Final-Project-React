@@ -3,6 +3,7 @@ import { Grid, styled, Typography } from '@mui/material';
 export const MainWrapper = styled(Grid)(() => ({
   height: '100vh',
   width: '100vw',
+  fontFamily: 'Poppins',
 }));
 
 export const TextLogo = styled(Typography)(() => ({
@@ -29,7 +30,7 @@ export const SideBarGrid = styled(Grid)(() => ({
   backgroundColor: '#03353E',
   width: '200px',
   height: '100vh',
-  minHeight: '800px',
+  minHeight: '900px',
   boxShadow: '1px 1px 5px 0px grey',
   position: 'sticky',
   opacity: '0.8',
@@ -43,7 +44,7 @@ export const MainGrid = styled(Grid)(() => ({
   justifyContent: 'space-evenly',
   height: 'auto',
   margin: '0 auto',
-  paddingLeft: '80px',
+  paddingLeft: '60px',
   marginBottom: '30px',
 }));
 

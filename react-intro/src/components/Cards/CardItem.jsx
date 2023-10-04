@@ -5,7 +5,6 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ModalWindow from '../modal/ModalWindow';
@@ -19,8 +18,7 @@ export default function CardItem({ quizCard, handleNavigate }) {
 
   return (
     <>
-      <Grid item xs={12} md={4} spacing={4} >
-        <Card sx={{ maxWidth: 300 }}>
+        <Card sx={{ maxWidth: 300, marginBottom: '30px' }}>
           <CardMedia
             sx={{ minHeight: 180 }}
             image={quizCard.img}
@@ -50,7 +48,6 @@ export default function CardItem({ quizCard, handleNavigate }) {
             </Button>
           </CardActions>
         </Card>
-      </Grid>
       {isShowModal && <ModalWindow
         active={isShowModal}
         setActive={handleShowModak}
