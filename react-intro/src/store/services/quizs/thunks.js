@@ -6,7 +6,11 @@ const fetchQuizs = createAsyncThunk(`${moduleName}/fetchQuizs`, async () => {
   const response = quizs.get();
   return response;
 });
+const postQuiz = createAsyncThunk(`${moduleName}/postQuiz`, async (quizObject) => {
+  quizs.post(quizObject);
+});
 
 export default {
   fetchQuizs,
+  postQuiz,
 };
