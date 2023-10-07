@@ -16,6 +16,7 @@ export const Item = styled('div')(() => ({
   alignItems: 'center',
   justifyContent: 'center',
   display: 'flex',
+  margin: '18px',
 }));
 
 export const HeaderGrid = styled(Grid)(() => ({
@@ -29,23 +30,24 @@ export const HeaderGrid = styled(Grid)(() => ({
 export const SideBarGrid = styled(Grid)(() => ({
   backgroundColor: '#03353E',
   width: '200px',
-  height: '100vh',
-  minHeight: '900px',
+  height: 'auto',
+  minHeight: '800px',
   boxShadow: '1px 1px 5px 0px grey',
   position: 'sticky',
   opacity: '0.8',
 }));
 
 export const MainGrid = styled(Grid)(() => ({
-  padding: '20px',
-  display: 'flex',
-  flexDirection: 'row',
-  alignItems: 'center',
+  padding: '10px',
+  // display: 'flex',
+  // flexDirection: 'row',
+  // alignItems: 'center',
   justifyContent: 'space-evenly',
   height: 'auto',
-  margin: '0 auto',
-  paddingLeft: '60px',
-  marginBottom: '30px',
+  // margin: '0 auto',
+  paddingLeft: '15px',
+  paddingRight: '15px',
+  marginTop: '30px',
 }));
 
 export const FooterGrid = styled(Grid)(() => ({

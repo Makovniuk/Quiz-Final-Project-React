@@ -7,15 +7,27 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import { useDispatch, useSelector } from 'react-redux';
 import ModalWindow from '../modal/ModalWindow';
+import actions from '../../store/services/quizs/actions';
 
 export default function CardItem({ quizCard, handleNavigate }) {
   const [isShowModal, setShowModal] = useState(false);
+  const { quizs, favorite } = useSelector((state) => state.quizsReducer);
+  const dispatch = useDispatch();
 
   const handleShowModak = () => {
     setShowModal(!isShowModal);
   };
 
+  const handleFavorite = (key) => {
+    dispatch(actions.switcherFavorite(key));
+    // eslint-disable-next-line no-console
+    console.log(quizs, key);
+  };
+
+  // eslint-disable-next-line no-console
+  console.log(quizs, favorite);
   return (
     <>
         <Card sx={{ maxWidth: 300, marginBottom: '30px' }}>
@@ -34,7 +46,10 @@ export default function CardItem({ quizCard, handleNavigate }) {
           </CardContent>
           <CardActions>
             <IconButton size="small" aria-label="add to favorites">
-              <FavoriteIcon color='red' />
+              <FavoriteIcon
+                style={{ color: quizCard.isFavorite ? 'red' : 'grey' }}
+                onClick={() => handleFavorite(quizCard.id)}
+              />
             </IconButton>
             <Button
               component="label"
